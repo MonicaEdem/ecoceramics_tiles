@@ -1,30 +1,20 @@
-import { ShoppingBag, Menu, X} from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { ShoppingBag, Menu, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navBarRef = useRef(null)
+  const [activeLink, setActiveLink] = useState("home"); // Track active section
 
-  const handleClicksOutside = event =>{
-    if (navBarRef.current && !navBarRef.current.contains(event.target)){
-        setMenuOpen(false);
-    }};
-
-
-    useEffect(() =>{
-        document.addEventListener('mousedown', handleClicksOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClicksOutside);
-         }
-    
-    }, []);
-
+  const handleClick = (link) => {
+    setActiveLink(link); // Set the clicked link as active
+  };
 
   return (
-    <div ref={navBarRef} className="fixed w-full bg-white py-4 px-6 lg:px-20 shadow-md z-50">
+    <div className="fixed w-full bg-white py-4 px-6 lg:px-20 shadow-md z-50">
       <div className="flex items-center justify-between">
-        <img src="" alt="logo" />
+        <a href="#home" onClick={() => handleClick("home")}>
+          <img src="" alt="logo" />
+        </a>
 
         {/* Menu for Small Screens */}
         <button
@@ -32,47 +22,89 @@ const NavBar = () => {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle Menu"
         >
-          {menuOpen?<X />:<Menu size={24} />}
+          {menuOpen ? <X /> : <Menu size={24} />}
         </button>
 
         {/* Links for Large Screens */}
         <div className="hidden lg:flex items-center gap-10">
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#about"
+            onClick={() => handleClick("about")}
+            className={`text-gray-700 transition ${
+              activeLink === "about" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             About
           </a>
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#products"
+            onClick={() => handleClick("products")}
+            className={`text-gray-700 transition ${
+              activeLink === "products" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             Products
           </a>
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#about-innovator"
+            onClick={() => handleClick("about-innovator")}
+            className={`text-gray-700 transition ${
+              activeLink === "about-innovator" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             Our Story
           </a>
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#contact"
+            onClick={() => handleClick("contact")}
+            className={`text-gray-700 transition ${
+              activeLink === "contact" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             Contact-US
           </a>
-          <button className="flex items-center gap-2 px-4 py-2 bg-slate-300 rounded-full text-gray-700 hover:bg-slate-400 transition">
-            <ShoppingBag className="size-5" /> Shop now
-          </button>
         </div>
       </div>
 
       {/* Links for Small Screens */}
       {menuOpen && (
         <div className="flex flex-col items-start mt-4 gap-4 lg:hidden transition-transform duration-300 ease-in-out transform">
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#about"
+            onClick={() => handleClick("about")}
+            className={`text-gray-700 transition ${
+              activeLink === "about" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             About
           </a>
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#products"
+            onClick={() => handleClick("products")}
+            className={`text-gray-700 transition ${
+              activeLink === "products" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             Products
           </a>
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#about-innovator"
+            onClick={() => handleClick("about-innovator")}
+            className={`text-gray-700 transition ${
+              activeLink === "about-innovator" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             Our Story
           </a>
-          <a href="" className="text-gray-700 hover:text-deepBlue transition">
+          <a
+            href="#contact"
+            onClick={() => handleClick("contact")}
+            className={`text-gray-700 transition ${
+              activeLink === "contact" ? "text-green-600" : "hover:text-green-600"
+            }`}
+          >
             Contact-US
           </a>
-          <button className="flex items-center gap-2 px-4 py-2 bg-slate-300 rounded-full text-gray-700 hover:bg-slate-400 transition">
-            <ShoppingBag className="size-5" /> Shop now
-          </button>
         </div>
       )}
     </div>

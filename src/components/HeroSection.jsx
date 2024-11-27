@@ -29,15 +29,18 @@ const HeroSection = () => {
         className="text-xl mb-8"
       >
         Eco-friendly ceramic tiles for your sustainable lifestyle
-      </motion.p>
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="bg-green-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-green-700 transition-colors"
-      >
-        Explore Collection
-      </motion.button>
+        </motion.p>
+        <motion.a
+  href="#products" 
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  className="bg-green-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-green-700 transition-colors inline-block"
+>
+  Explore Collection
+</motion.a>
+
+
     </div>
   </section>
 

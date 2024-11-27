@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Award, TreePine, Recycle } from 'lucide-react';
+import { Recycle, CheckCircle, Lightbulb } from 'lucide-react';
 
 export default function InnovatorSection() {
   const { ref, inView } = useInView({
@@ -15,39 +15,44 @@ export default function InnovatorSection() {
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8 }}
-      className="grid md:grid-cols-2 gap-12 items-center"
+      className="grid md:grid-cols-2 gap-12 items-center mb-10 px-6 py-8 sm:px-8 lg:px-16 xl:px-20"
     >
-      <div className="relative">
+      {/* Image Section */}
+      <div className="relative flex justify-center md:justify-start" id='about-innovator'>
         <img
           src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?auto=format&fit=crop&q=80&w=2069"
           alt="Sarah Chen - Founder"
-          className="rounded-lg shadow-xl"
+          className="rounded-lg shadow-xl max-w-full md:max-w-3/4 lg:max-w-2/3 xl:max-w-1/2"
         />
-        <div className="absolute -bottom-6 -right-6 bg-green-600 text-white p-4 rounded-lg shadow-lg hidden md:block">
-          <p className="font-semibold">20+ Years Experience</p>
+        {/* Text Box (visible only on medium screens and above) */}
+        <div className="absolute bottom-0 right-4 md:bottom-[-1rem] md:right-[-2rem] lg:bottom-[-2rem] lg:right-[-2rem] bg-green-600 text-white p-2 md:p-3 rounded-lg shadow-lg text-xs sm:text-sm md:text-base font-semibold hidden md:block">
+          Passion for Sustainable Design
         </div>
       </div>
+
+      {/* Text Section */}
       <div>
-        <h2 className="text-4xl font-bold mb-6 text-gray-800">Meet Our Innovator</h2>
-        <h3 className="text-2xl text-green-700 mb-4">Sarah Chen</h3>
-        <p className="text-gray-600 mb-6">
-          With over two decades of experience in sustainable architecture and ceramic design, Sarah Chen has revolutionized
-          the way we think about eco-friendly building materials. Her passion for environmental conservation led her to
-          found EcoCeramic in 2010, with a vision to create beautiful, sustainable tiles that don't compromise on quality
-          or aesthetics.
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-800 text-center md:text-left">
+          Meet Our Innovator
+        </h2>
+        <h3 className="text-xl sm:text-2xl text-green-700 mb-4 text-center md:text-left">
+          Name
+        </h3>
+        <p className="text-gray-600 mb-6 text-lg sm:text-base text-center md:text-left">
+          With a deep passion for sustainable design and eco-friendly materials, [Founder’s Name] set out to create a brand that combines beauty and responsibility. Inspired by the need for environmentally conscious building materials, TUU Ceramic Works was born with a vision to craft high-quality tiles that not only enhance spaces but also contribute to a greener planet. At EcoCeramic, we're committed to offering products that reflect our dedication to sustainability, innovation, and design excellence.
         </p>
         <div className="space-y-4">
           <div className="flex items-center space-x-4 text-gray-700">
-            <Award className="text-green-600" size={24} />
-            <span>Sustainable Design Award 2023</span>
+            <CheckCircle className="text-green-600" size={24} />
+            <span>Committed to Eco-Friendly Manufacturing</span>
           </div>
           <div className="flex items-center space-x-4 text-gray-700">
-            <TreePine className="text-green-600" size={24} />
-            <span>Environmental Conservation Pioneer</span>
+            <Lightbulb className="text-green-600" size={24} />
+            <span>Redefining Ceramic Design with Innovation</span>
           </div>
           <div className="flex items-center space-x-4 text-gray-700">
             <Recycle className="text-green-600" size={24} />
-            <span>Zero Waste Manufacturing Expert</span>
+            <span>Striving for Zero Waste in Every Product</span>
           </div>
         </div>
       </div>

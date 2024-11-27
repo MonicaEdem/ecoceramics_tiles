@@ -7,7 +7,7 @@ const AboutProducts = () => {
   const inView = useInView(ref, { once: true }); // Check if the element is in view
 
   return (
-    <div id="about" className="py-20 px-4">
+    <div id="about" className="py-20 px-4 lg:px-16 lg:py-24">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref} // Attach the ref here
@@ -17,11 +17,12 @@ const AboutProducts = () => {
           className="grid md:grid-cols-2 gap-12 items-center"
         >
           <div>
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">
+            {/* Apply text sizes similar to the Innovator Section */}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-800">
               Our Commitment to Sustainability
             </h2>
-            <p className="text-gray-600 mb-6">
-              At EcoCeramic, we believe in creating beautiful spaces without compromising our planet's future. Our tiles are crafted from sustainable materials using eco-friendly processes, ensuring minimal environmental impact while maintaining the highest quality standards.
+            <p className="text-gray-600 mb-6 text-lg">
+              At TUU Ceramic Works, we believe in creating beautiful spaces without compromising our planet's future. Our tiles are crafted from sustainable materials using eco-friendly processes, ensuring minimal environmental impact while maintaining the highest quality standards.
             </p>
             <div className="flex items-center space-x-4 text-green-600">
               <Leaf size={24} />
