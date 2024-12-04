@@ -1,22 +1,38 @@
 import { ShoppingBag, Menu, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { fetchData } from "../api/Api";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("home"); // Track active section
+  const [activeLink, setActiveLink] = useState("home");
+  const [logo, setLogo] = useState("");
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      try {
+        const data = await fetchData();
+        if (data) {
+          setLogo(data[16][2] || "");
+        }
+      } catch (error) {
+        console.error("Error fetching logo:", error);
+      }
+    };
+
+    fetchLogo();
+  }, []);
 
   const handleClick = (link) => {
-    setActiveLink(link); // Set the clicked link as active
+    setActiveLink(link);
   };
 
   return (
     <div className="fixed w-full bg-white py-4 px-6 lg:px-20 shadow-md z-50">
       <div className="flex items-center justify-between">
         <a href="#home" onClick={() => handleClick("home")}>
-          <img src="" alt="logo" />
+          {logo && <img src={logo} alt="logo" className="w-44 h-auto" />}
         </a>
 
-        {/* Menu for Small Screens */}
         <button
           className="lg:hidden block text-gray-600"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -25,7 +41,6 @@ const NavBar = () => {
           {menuOpen ? <X /> : <Menu size={24} />}
         </button>
 
-        {/* Links for Large Screens */}
         <div className="hidden lg:flex items-center gap-10">
           <a
             href="#about"
@@ -49,7 +64,9 @@ const NavBar = () => {
             href="#about-innovator"
             onClick={() => handleClick("about-innovator")}
             className={`text-gray-700 transition ${
-              activeLink === "about-innovator" ? "text-green-600" : "hover:text-green-600"
+              activeLink === "about-innovator"
+                ? "text-green-600"
+                : "hover:text-green-600"
             }`}
           >
             Our Story
@@ -58,7 +75,9 @@ const NavBar = () => {
             href="#contact"
             onClick={() => handleClick("contact")}
             className={`text-gray-700 transition ${
-              activeLink === "contact" ? "text-green-600" : "hover:text-green-600"
+              activeLink === "contact"
+                ? "text-green-600"
+                : "hover:text-green-600"
             }`}
           >
             Contact-US
@@ -66,7 +85,6 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Links for Small Screens */}
       {menuOpen && (
         <div className="flex flex-col items-start mt-4 gap-4 lg:hidden transition-transform duration-300 ease-in-out transform">
           <a
@@ -91,7 +109,9 @@ const NavBar = () => {
             href="#about-innovator"
             onClick={() => handleClick("about-innovator")}
             className={`text-gray-700 transition ${
-              activeLink === "about-innovator" ? "text-green-600" : "hover:text-green-600"
+              activeLink === "about-innovator"
+                ? "text-green-600"
+                : "hover:text-green-600"
             }`}
           >
             Our Story
@@ -100,7 +120,9 @@ const NavBar = () => {
             href="#contact"
             onClick={() => handleClick("contact")}
             className={`text-gray-700 transition ${
-              activeLink === "contact" ? "text-green-600" : "hover:text-green-600"
+              activeLink === "contact"
+                ? "text-green-600"
+                : "hover:text-green-600"
             }`}
           >
             Contact-US

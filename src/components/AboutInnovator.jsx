@@ -1,13 +1,34 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Recycle, CheckCircle, Lightbulb } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Recycle, CheckCircle, Lightbulb } from "lucide-react";
+import { fetchData } from "../api/Api";
 
 export default function InnovatorSection() {
+  const [title, setTitle] = useState("");
+  const [paragraph, setParagraph] = useState("");
+  const [image, setImage] = useState("");
+
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  useEffect(() => {
+    const fetchSheetData = async () => {
+      try {
+        const data = await fetchData();
+        if (data && data[7]) {
+          setTitle(data[7][0]);
+          setParagraph(data[7][1]);
+          setImage(data[7][2]);
+        }
+      } catch (error) {
+        console.error("Error fetching InnovatorSection data:", error);
+      }
+    };
+    fetchSheetData();
+  }, []);
 
   return (
     <motion.div
@@ -18,13 +39,14 @@ export default function InnovatorSection() {
       className="grid md:grid-cols-2 gap-12 items-center mb-10 px-6 py-8 sm:px-8 lg:px-16 xl:px-20"
     >
       {/* Image Section */}
-      <div className="relative flex justify-center md:justify-start" id='about-innovator'>
-        <img
-          src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?auto=format&fit=crop&q=80&w=2069"
-          alt="Sarah Chen - Founder"
-          className="rounded-lg shadow-xl max-w-full md:max-w-3/4 lg:max-w-2/3 xl:max-w-1/2"
-        />
-        {/* Text Box (visible only on medium screens and above) */}
+      <div className="relative flex justify-center md:justify-start" id="about-innovator">
+        {image && (
+          <img
+            src={image}
+            alt="Innovator"
+            className="rounded-lg shadow-xl w-full max-w-full md:max-w-1/2 lg:max-w-1/3 xl:max-w-1/4 object-cover h-96 md:h-128 lg:h-112 xl:h-128 object-top"
+          />
+        )}
         <div className="absolute bottom-0 right-4 md:bottom-[-1rem] md:right-[-2rem] lg:bottom-[-2rem] lg:right-[-2rem] bg-green-600 text-white p-2 md:p-3 rounded-lg shadow-lg text-xs sm:text-sm md:text-base font-semibold hidden md:block">
           Passion for Sustainable Design
         </div>
@@ -33,13 +55,13 @@ export default function InnovatorSection() {
       {/* Text Section */}
       <div>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-800 text-center md:text-left">
-          Meet Our Innovator
+          {title}
         </h2>
         <h3 className="text-xl sm:text-2xl text-green-700 mb-4 text-center md:text-left">
-          Name
+          Robert Tuu
         </h3>
         <p className="text-gray-600 mb-6 text-lg sm:text-base text-center md:text-left">
-          With a deep passion for sustainable design and eco-friendly materials, [Founder’s Name] set out to create a brand that combines beauty and responsibility. Inspired by the need for environmentally conscious building materials, TUU Ceramic Works was born with a vision to craft high-quality tiles that not only enhance spaces but also contribute to a greener planet. At EcoCeramic, we're committed to offering products that reflect our dedication to sustainability, innovation, and design excellence.
+          {paragraph}
         </p>
         <div className="space-y-4">
           <div className="flex items-center space-x-4 text-gray-700">

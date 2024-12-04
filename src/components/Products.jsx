@@ -1,52 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const products = [
-  {
-    id: 1,
-    name: "Sierra White",
-    description: "A sleek, eco-friendly tile with a clean and modern finish.",
-    img: "path_to_image1.jpg",
-  },
-  {
-    id: 2,
-    name: "Terra Clay",
-    description: "Warm, earthy tones perfect for creating cozy spaces.",
-    img: "path_to_image2.jpg",
-  },
-  {
-    id: 3,
-    name: "Ocean Blue",
-    description: "Inspired by the ocean, this tile adds a touch of serenity.",
-    img: "path_to_image3.jpg",
-  },
-];
+import { fetchData } from "../api/Api";
 
 const Products = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      try {
+        const data = await fetchData();
+        if (data) {
+          setTitle(data[3][0]);
+          setDescription(data[3][1]);
+          const fetchedProducts = [
+            {
+              id: 1,
+              name: data[4][1],
+              img: data[4][2],
+            },
+            {
+              id: 2,
+              name: data[5][1],
+              img: data[5][2],
+            },
+            {
+              id: 3,
+              name: data[6][1],
+              img: data[6][2],
+            },
+          ];
+          setProducts(fetchedProducts);
+        }
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    };
+
+    fetchProductsData();
+  }, []);
+
   return (
     <section className="bg-gray-50 py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="products">
-        {/* Title */}
         <motion.h2
           className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Our Tiles
+          {title}
         </motion.h2>
-        {/* Description */}
         <motion.p
           className="text-center text-gray-600 max-w-2xl mx-auto mb-12 text-lg sm:text-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          Discover our beautiful collection of eco-friendly ceramic tiles.
+          {description}
         </motion.p>
 
-        {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <motion.div
@@ -60,7 +75,7 @@ const Products = () => {
                 delay: index * 0.2,
                 ease: "easeOut",
               }}
-              whileHover={{ scale: 1.03 }} // Slight scale for smooth hover effect
+              whileHover={{ scale: 1.03 }}
             >
               <img
                 src={product.img}
@@ -68,16 +83,14 @@ const Products = () => {
                 className="w-full h-48 sm:h-56 object-cover"
               />
               <div className="p-6 text-center">
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-l font-normal text-gray-800">
                   {product.name}
                 </h3>
-                <p className="text-gray-600 mt-2">{product.description}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Call-to-Action Button */}
         <motion.div
           className="text-center mt-12"
           initial={{ opacity: 0, scale: 0.8 }}
