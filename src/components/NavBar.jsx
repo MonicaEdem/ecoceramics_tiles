@@ -80,7 +80,7 @@ const NavBar = () => {
                 : "hover:text-green-600"
             }`}
           >
-            Contact-US
+            Contact Us
           </a>
         </div>
       </div>
@@ -125,7 +125,7 @@ const NavBar = () => {
                 : "hover:text-green-600"
             }`}
           >
-            Contact-US
+            Contact Us
           </a>
         </div>
       )}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchData } from "../api/Api";
 import Facebook from "../assets/facebook.svg";
-import Whatsapp from "../assets/whatsapp.svg";
+import Pinterest from "../assets/pinterest.svg";
 import Instagram from "../assets/instagram.svg";
 import { Mail, Phone } from "lucide-react";
 
@@ -12,7 +12,7 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
+  const [pinterest, setPinterest] = useState("");
 
   useEffect(() => {
     const fetchFooterData = async () => {
@@ -25,7 +25,7 @@ const Footer = () => {
           setEmail(data[11][1]?.split("\n")[0] || "");
           setFacebook(data[12][3]?.split("\n")[0] || "");
           setInstagram(data[13][3]?.split("\n")[0] || "");
-          setWhatsapp(data[14][3]?.split("\n")[0] || "");
+          setPinterest(data[14][3]?.split("\n")[0] || "");
         }
       } catch (error) {
         console.error("Error fetching footer data:", error);
@@ -94,14 +94,14 @@ const Footer = () => {
                   <img src={Instagram} alt="Instagram" className="w-10" />
                 </a>
               )}
-              {whatsapp && (
+              {pinterest && (
                 <a
-                  href={whatsapp}
+                  href={pinterest}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-transform transform hover:scale-110"
                 >
-                  <img src={Whatsapp} alt="Whatsapp" className="w-10" />
+                  <img src={Pinterest} alt="Pinterest" className="w-9" />
                 </a>
               )}
             </div>
@@ -111,7 +111,7 @@ const Footer = () => {
 
       <div className="border-t border-gray-300 py-6 ml-10 mr-10">
         <p className="text-center text-gray-100 text-sm">
-          &copy; {new Date().getFullYear()} Your Business Name. All rights reserved.
+          &copy; {new Date().getFullYear()} EcoCeramic Tiles. All rights reserved.
         </p>
       </div>
     </footer>
